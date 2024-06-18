@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1718727364 source:c:\users\54112\onedrive\escritorio\code\github\proyectos\repositorio\tpintegrador\main.cpp
+	<iostream>
+	"menu.h"
+
+1718727364 source:c:\users\54112\onedrive\escritorio\code\github\proyectos\repositorio\tpintegrador\menu.cpp
+	<iostream>
+	"menu.h"
+
+1718727488 c:\users\54112\onedrive\escritorio\code\github\proyectos\repositorio\tpintegrador\menu.h
+
+1718727364 c:\users\54112\onedrive\escritorio\code\github\proyectos\repositorio\tpintegrador\menu.cpp
+	<iostream>
+	"menu.h"
+
