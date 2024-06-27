@@ -1,7 +1,7 @@
 # depslib dependency file v1.0
-1718727364 source:c:\users\54112\onedrive\escritorio\code\github\proyectos\repositorio\tpintegrador\main.cpp
+1719458931 source:c:\users\54112\onedrive\escritorio\code\github\proyectos\repositorio\tpintegrador\main.cpp
 	<iostream>
-	"menu.h"
+	"juego.h"
 
 1718727364 source:c:\users\54112\onedrive\escritorio\code\github\proyectos\repositorio\tpintegrador\menu.cpp
 	<iostream>
@@ -22,4 +22,14 @@
 
 1718826756 /Users/federicotanzi/Documents/Programacion1/tpintegrador/juego.h
 	<string>
+
+1718927432 c:\users\54112\onedrive\escritorio\code\github\proyectos\repositorio\tpintegrador\juego.h
+	<string>
+
+1718925534 source:c:\users\54112\onedrive\escritorio\code\github\proyectos\repositorio\tpintegrador\juego.cpp
+	"juego.h"
+	<iostream>
+	<cstdlib>
+	<ctime>
+	<algorithm>
 
