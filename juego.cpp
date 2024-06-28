@@ -65,7 +65,7 @@ void imprimirResultados(int dados[], int puntaje, const string& nombre) {
     for (int i = 0; i < 6; i++) {
         cout << dados[i] << " ";
     }
-    cout << endl;
+    cout << endl<< endl;
     cout << "Combinaci—n: ";
     if (escalera(dados)) {
         cout << "Escalera" << endl;
@@ -74,7 +74,7 @@ void imprimirResultados(int dados[], int puntaje, const string& nombre) {
     } else {
         cout << "Suma de dados" << endl;
     }
-    cout << "Puntaje: " << puntaje << endl;
+    cout << "Puntaje: " << puntaje << endl<<endl;
 }
 
 void juegoUnJugador() {
@@ -88,7 +88,11 @@ void juegoUnJugador() {
     srand(time(0)); // Inicializar la semilla para la funci—n rand
 
     while (puntajeTotal < 100) {
-        cout << "Ronda " << ronda << " - Puntaje actual: " << puntajeTotal << endl;
+
+        system("pause");
+        system("CLS");
+        cout << "--------RONDA " << ronda<<"--------"<<endl<<endl;
+        cout << "Puntaje actual: " << puntajeTotal << endl;
         int maxPuntajeRonda = 0;
 
         for (int i = 0; i < 3; i++) {
@@ -111,6 +115,7 @@ void juegoUnJugador() {
                 maxPuntajeRonda = puntaje;
             }
 
+            cout<<endl;
             imprimirResultados(dados, puntaje, nombre);
         }
 
@@ -118,7 +123,10 @@ void juegoUnJugador() {
         ronda++;
     }
 
+    system("pause");
+    system("CLS");
     cout << "ÁFelicidades, " << nombre << "! Has ganado con un puntaje de " << puntajeTotal << endl;
+
 
     if (puntajeTotal > puntuacionMasAlta) {
         puntuacionMasAlta = puntajeTotal;
