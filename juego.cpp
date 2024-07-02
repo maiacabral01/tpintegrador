@@ -161,6 +161,7 @@ void juegoDosJugadores() {
             tirarDados(dados);
             int puntaje = calcularPuntaje(dados);
 
+
             if (puntaje == 1000) {
                 cout << "Escalera! " << nombre1 << " ha ganado la partida." << endl;
                 return;
@@ -179,6 +180,10 @@ void juegoDosJugadores() {
 
             imprimirResultados(dados, puntaje, nombre1);
         }
+        cout <<"--------------------------------------------------------"<<endl;
+        cout <<"Maximo Puntaje de la Ronda: "<<maxPuntajeRonda1<<endl;
+
+
         system("pause");
         system("CLS");
 
@@ -211,7 +216,13 @@ void juegoDosJugadores() {
             }
 
             imprimirResultados(dados, puntaje, nombre2);
+
         }
+
+
+        cout <<"--------------------------------------------------------"<<endl;
+        cout <<"Maximo Puntaje de la Ronda: "<<maxPuntajeRonda2<<endl;
+
         system("pause");
         system("CLS");
 
@@ -242,6 +253,7 @@ void juegoDosJugadores() {
         nombrePuntuacionMasAlta = nombre2;
     }
 }
+
 
 void mostrarPuntuacionMasAlta() {
     cout << "La puntuaci—n m‡s alta es de " << nombrePuntuacionMasAlta << " con " << puntuacionMasAlta << " puntos." << endl;
