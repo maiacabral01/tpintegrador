@@ -141,6 +141,9 @@ void juegoDosJugadores() {
     cout << "Ingrese el nombre del segundo jugador: ";
     cin >> nombre2;
 
+    system("pause");
+    system("CLS");
+
     int puntajeTotal1 = 0, puntajeTotal2 = 0;
     int ronda = 1;
     int dados[6];
@@ -148,7 +151,10 @@ void juegoDosJugadores() {
 
     while (puntajeTotal1 < 100 && puntajeTotal2 < 100) {
         // Turno del primer jugador
-        cout << "Ronda " << ronda << " - Puntaje de " << nombre1 << ": " << puntajeTotal1 << endl;
+
+        cout <<"TURNO DE "<<nombre1<<"   | RONDA " << ronda<<"   | PUNTAJE TOTAL: "<<puntajeTotal1<<endl;
+        cout <<"--------------------------------------------------------"<<endl;
+
         int maxPuntajeRonda1 = 0;
 
         for (int i = 0; i < 3; i++) {
@@ -156,7 +162,7 @@ void juegoDosJugadores() {
             int puntaje = calcularPuntaje(dados);
 
             if (puntaje == 1000) {
-                cout << "ÁEscalera! " << nombre1 << " ha ganado la partida." << endl;
+                cout << "Escalera! " << nombre1 << " ha ganado la partida." << endl;
                 return;
             }
 
@@ -173,11 +179,15 @@ void juegoDosJugadores() {
 
             imprimirResultados(dados, puntaje, nombre1);
         }
+        system("pause");
+        system("CLS");
 
         puntajeTotal1 += maxPuntajeRonda1;
 
         // Turno del segundo jugador
-        cout << "Ronda " << ronda << " - Puntaje de " << nombre2 << ": " << puntajeTotal2 << endl;
+        cout <<"TURNO DE "<<nombre2<<"   | RONDA " << ronda<<"   | PUNTAJE TOTAL: "<<puntajeTotal2<<endl;
+        cout <<"--------------------------------------------------------"<<endl;
+
         int maxPuntajeRonda2 = 0;
 
         for (int i = 0; i < 3; i++) {
@@ -202,6 +212,8 @@ void juegoDosJugadores() {
 
             imprimirResultados(dados, puntaje, nombre2);
         }
+        system("pause");
+        system("CLS");
 
         puntajeTotal2 += maxPuntajeRonda2;
         ronda++;
