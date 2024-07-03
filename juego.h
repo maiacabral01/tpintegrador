@@ -1,11 +1,12 @@
 #ifndef JUEGO_H_INCLUDED
 #define JUEGO_H_INCLUDED
 
-#include <string>
+#include <string> // Incluye la biblioteca de la clase string
 
-void juegoUnJugador();
-void juegoDosJugadores();
-void mostrarPuntuacionMasAlta();
+// Declaraciones de las funciones
+void juegoUnJugador(int& puntuacionMasAlta, std::string& nombrePuntuacionMasAlta);
+void juegoDosJugadores(int& puntuacionMasAlta, std::string& nombrePuntuacionMasAlta);
+void mostrarPuntuacionMasAlta(int puntuacionMasAlta, const std::string& nombrePuntuacionMasAlta);
 void tirarDados(int dados[]);
 int calcularPuntaje(int dados[]);
 bool escalera(int dados[]);

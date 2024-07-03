@@ -5,6 +5,8 @@ using namespace std;
 
 int main() {
     int opcion;
+    int puntuacionMasAlta = 0;
+    string nombrePuntuacionMasAlta;
 
     do {
         cout << "--------Menu Principal--------" << endl<<endl;
@@ -15,32 +17,22 @@ int main() {
         cout << "Ingrese una opcion: ";
         cin >> opcion;
 
-        system("CLS");
-
         switch (opcion) {
 
             case 1:
-                juegoUnJugador();
-                system("pause");
-                system("CLS");
+                juegoUnJugador(puntuacionMasAlta, nombrePuntuacionMasAlta);
                 break;
             case 2:
-                juegoDosJugadores();
-                system("pause");
-                system("CLS");
+                juegoDosJugadores(puntuacionMasAlta, nombrePuntuacionMasAlta);
                 break;
             case 3:
-                mostrarPuntuacionMasAlta();
-                 system("pause");
-                 system("CLS");
+                mostrarPuntuacionMasAlta(puntuacionMasAlta, nombrePuntuacionMasAlta);
                 break;
             case 4:
                 cout << "Saliendo del juego..." << endl;
                 break;
             default:
-                system("CLS");
                 cout << "Opcion no valida. Intente de nuevo." << endl;
-                system("pause");
 
         }
     } while (opcion != 4);

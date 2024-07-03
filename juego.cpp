@@ -1,249 +1,231 @@
-#ifndef JUEGO_CPP_INCLUDED
-#define JUEGO_CPP_INCLUDED
+#include "juego.h" // Incluye la cabecera del archivo de juego
+#include <iostream> // Incluye la biblioteca de entrada y salida estándar
+#include <cstdlib> // Incluye la biblioteca de funciones generales de propósito
+#include <ctime> // Incluye la biblioteca de funciones relacionadas con el tiempo
+#include <algorithm> // Incluye la biblioteca de algoritmos
 
-#include "juego.h"
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
-#include <algorithm>
+using namespace std; // Permite el uso del espacio de nombres estándar
 
-using namespace std;
-
-static int puntuacionMasAlta = 0;
-static string nombrePuntuacionMasAlta;
-
+// Función que simula tirar los dados
 void tirarDados(int dados[]) {
     for (int i = 0; i < 6; i++) {
-        dados[i] = rand() % 6 + 1;
+        dados[i] = rand() % 6 + 1; // Genera un número aleatorio entre 1 y 6 para cada dado
     }
 }
-    // Contar los dados del 1 al 6
+
+// Función que calcula el puntaje basado en los resultados de los dados
 int calcularPuntaje(int dados[]) {
-    int conteo[7] = {0};
+    int conteo[7] = {0}; // Array para contar la frecuencia de cada valor de dado (1-6)
     for (int i = 0; i < 6; i++) {
-        conteo[dados[i]]++;
+        conteo[dados[i]]++; // Incrementa el contador correspondiente al valor del dado
     }
 
-    // Verificar si es escalera
+    // Verifica si hay una escalera (1, 2, 3, 4, 5, 6)
     if (escalera(dados)) {
-        return 1000; // Un puntaje alto que indique que gan� con una escalera
+        return 1000; // Un puntaje alto que indica que el jugador ganó con una escalera
     }
 
-    // Verificar si hay un sexteto de 6
+    // Verifica si hay un sexteto de 6
     if (conteo[6] == 6) {
         return -1; // Indica que el puntaje se debe resetear a 0
     }
 
-    // Verificar si hay un sexteto de otro n�mero
+    // Verifica si hay un sexteto de otro número
     for (int i = 1; i <= 5; i++) {
         if (conteo[i] == 6) {
-            return i * 10;
+            return i * 10; // Calcula el puntaje basado en el número del sexteto
         }
     }
 
-    // Sumar todos los dados si no se cumple ninguna condici�n especial
+    // Suma todos los dados si no se cumple ninguna condición especial
     int puntaje = 0;
     for (int i = 1; i <= 6; i++) {
         puntaje += conteo[i] * i;
     }
 
-    return puntaje;
+    return puntaje; // Devuelve el puntaje calculado
 }
 
+// Función que verifica si los dados forman una escalera
 bool escalera(int dados[]) {
-    sort(dados, dados + 6);
+    sort(dados, dados + 6); // Ordena los dados
     for (int i = 0; i < 6; i++) {
         if (dados[i] != i + 1) {
-            return false;
+            return false; // Si algún dado no coincide con el valor esperado, no es una escalera
         }
     }
-    return true;
+    return true; // Si todos los valores coinciden, es una escalera
 }
 
+// Función que imprime los resultados de los dados y el puntaje
 void imprimirResultados(int dados[], int puntaje, const string& nombre) {
     cout << "Dados: ";
     for (int i = 0; i < 6; i++) {
-        cout << dados[i] << " ";
+        cout << dados[i] << " "; // Imprime los valores de los dados
     }
-    cout << endl<< endl;
-    cout << "Combinaci�n: ";
+    cout << endl << endl;
+    cout << "Combinacion: ";
     if (escalera(dados)) {
-        cout << "Escalera" << endl;
+        cout << "Escalera" << endl; // Indica que se obtuvo una escalera
     } else if (puntaje == -1) {
-        cout << "Sexteto de 6 - Puntaje reseteado" << endl;
+        cout << "Sexteto de 6 - Puntaje reseteado" << endl; // Indica que se obtuvo un sexteto de 6
     } else {
-        cout << "Suma de dados" << endl;
+        cout << "Suma de dados" << endl; // Indica que el puntaje se basa en la suma de los dados
     }
-    cout << "Puntaje: " << puntaje << endl<<endl;
+    cout << "Puntaje: " << puntaje << endl << endl; // Imprime el puntaje obtenido
 }
 
-void juegoUnJugador() {
-    string nombre;
+// Función para el juego de un jugador
+void juegoUnJugador(int& puntuacionMasAlta, string& nombrePuntuacionMasAlta) {
+    string nombre; // Variable para el nombre del jugador
     cout << "Ingrese el nombre del jugador: ";
-    cin >> nombre;
+    cin >> nombre; // Lee el nombre del jugador
 
-    int puntajeTotal = 0;
-    int ronda = 1;
-    int dados[6];
-    srand(time(0)); // Inicializar la semilla para la funci�n rand
+    int puntajeTotal = 0; // Puntaje total del jugador
+    int ronda = 1; // Número de ronda
+    int dados[6]; // Array para almacenar los valores de los dados
+    srand(time(0)); // Inicializa la semilla para la función rand
 
-    while (puntajeTotal < 100) {
-
-        system("pause");
-        system("CLS");
-        cout << "--------RONDA " << ronda<<"--------"<<endl<<endl;
+    while (puntajeTotal < 100) { // Continua jugando hasta que el puntaje total sea al menos 100
+        cout << "--------RONDA " << ronda << "--------" << endl << endl;
         cout << "Puntaje actual: " << puntajeTotal << endl;
-        int maxPuntajeRonda = 0;
+        int maxPuntajeRonda = 0; // Puntaje máximo de la ronda
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) { // El jugador tira los dados 3 veces en cada ronda
             tirarDados(dados);
             int puntaje = calcularPuntaje(dados);
 
-            if (puntaje == 1000) {
-                cout << "�Escalera! " << nombre << " ha ganado la partida." << endl;
-                return;
+            if (puntaje == 1000) { // Si se obtiene una escalera
+                cout << "Escalera! " << nombre << " ha ganado la partida." << endl;
+                return; // Termina el juego
             }
 
-            if (puntaje == -1) {
-                puntajeTotal = 0;
+            if (puntaje == -1) { // Si se obtiene un sexteto de 6
+                puntajeTotal = 0; // Resetea el puntaje total
                 maxPuntajeRonda = 0;
                 cout << "Sexteto de 6 - Puntaje reseteado a 0" << endl;
                 break;
             }
 
             if (puntaje > maxPuntajeRonda) {
-                maxPuntajeRonda = puntaje;
+                maxPuntajeRonda = puntaje; // Actualiza el puntaje máximo de la ronda
             }
 
-            cout<<endl;
-            imprimirResultados(dados, puntaje, nombre);
+            cout << endl;
+            imprimirResultados(dados, puntaje, nombre); // Imprime los resultados de los dados
         }
 
-        puntajeTotal += maxPuntajeRonda;
-        ronda++;
+        puntajeTotal += maxPuntajeRonda; // Actualiza el puntaje total del jugador
+        ronda++; // Incrementa el número de ronda
     }
 
-    system("pause");
-    system("CLS");
-    cout << "�Felicidades, " << nombre << "! Has ganado con un puntaje de " << puntajeTotal << endl;
+    cout << "Felicidades, " << nombre << "! Has ganado con un puntaje de " << puntajeTotal << endl;
 
-
+    // Actualiza la puntuación más alta si el jugador ha obtenido una puntuación mayor
     if (puntajeTotal > puntuacionMasAlta) {
         puntuacionMasAlta = puntajeTotal;
         nombrePuntuacionMasAlta = nombre;
     }
 }
 
-void juegoDosJugadores() {
-    string nombre1, nombre2;
+// Función para el juego de dos jugadores
+void juegoDosJugadores(int& puntuacionMasAlta, string& nombrePuntuacionMasAlta) {
+    string nombre1, nombre2; // Variables para los nombres de los jugadores
     cout << "Ingrese el nombre del primer jugador: ";
     cin >> nombre1;
     cout << "Ingrese el nombre del segundo jugador: ";
     cin >> nombre2;
 
-    system("pause");
-    system("CLS");
+    int puntajeTotal1 = 0, puntajeTotal2 = 0; // Puntajes totales de los jugadores
+    int ronda = 1; // Número de ronda
+    int dados[6]; // Array para almacenar los valores de los dados
+    srand(time(0)); // Inicializa la semilla para la función rand
 
-    int puntajeTotal1 = 0, puntajeTotal2 = 0;
-    int ronda = 1;
-    int dados[6];
-    srand(time(0)); // Inicializar la semilla para la funci�n rand
-
-    while (puntajeTotal1 < 100 && puntajeTotal2 < 100) {
+    while (puntajeTotal1 < 100 && puntajeTotal2 < 100) { // Continua jugando hasta que uno de los jugadores obtenga al menos 100 puntos
         // Turno del primer jugador
+        cout << "TURNO DE " << nombre1 << " | RONDA " << ronda << " | PUNTAJE TOTAL: " << puntajeTotal1 << endl;
+        cout << "--------------------------------------------------------" << endl;
+        int maxPuntajeRonda1 = 0; // Puntaje máximo de la ronda para el primer jugador
 
-        cout <<"TURNO DE "<<nombre1<<"   | RONDA " << ronda<<"   | PUNTAJE TOTAL: "<<puntajeTotal1<<endl;
-        cout <<"--------------------------------------------------------"<<endl;
-
-        int maxPuntajeRonda1 = 0;
-
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) { // El jugador tira los dados 3 veces en cada ronda
             tirarDados(dados);
             int puntaje = calcularPuntaje(dados);
 
-
-            if (puntaje == 1000) {
+            if (puntaje == 1000) { // Si se obtiene una escalera
                 cout << "Escalera! " << nombre1 << " ha ganado la partida." << endl;
-                return;
+                return; // Termina el juego
             }
 
-            if (puntaje == -1) {
-                puntajeTotal1 = 0;
+            if (puntaje == -1) { // Si se obtiene un sexteto de 6
+                puntajeTotal1 = 0; // Resetea el puntaje total del primer jugador
                 maxPuntajeRonda1 = 0;
                 cout << "Sexteto de 6 - Puntaje reseteado a 0" << endl;
                 break;
             }
 
             if (puntaje > maxPuntajeRonda1) {
-                maxPuntajeRonda1 = puntaje;
+                maxPuntajeRonda1 = puntaje; // Actualiza el puntaje máximo de la ronda
             }
 
-            imprimirResultados(dados, puntaje, nombre1);
+            imprimirResultados(dados, puntaje, nombre1); // Imprime los resultados de los dados
         }
-        cout <<"--------------------------------------------------------"<<endl;
-        cout <<"Maximo Puntaje de la Ronda: "<<maxPuntajeRonda1<<endl;
 
+        cout << "--------------------------------------------------------" << endl;
+        cout << "Maximo Puntaje de la Ronda: " << maxPuntajeRonda1 << endl;
 
-        system("pause");
-        system("CLS");
-
-        puntajeTotal1 += maxPuntajeRonda1;
+        puntajeTotal1 += maxPuntajeRonda1; // Actualiza el puntaje total del primer jugador
 
         // Turno del segundo jugador
-        cout <<"TURNO DE "<<nombre2<<"   | RONDA " << ronda<<"   | PUNTAJE TOTAL: "<<puntajeTotal2<<endl;
-        cout <<"--------------------------------------------------------"<<endl;
+        cout << "TURNO DE " << nombre2 << " | RONDA " << ronda << " | PUNTAJE TOTAL: " << puntajeTotal2 << endl;
+        cout << "--------------------------------------------------------" << endl;
+        int maxPuntajeRonda2 = 0; // Puntaje máximo de la ronda para el segundo jugador
 
-        int maxPuntajeRonda2 = 0;
-
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) { // El jugador tira los dados 3 veces en cada ronda
             tirarDados(dados);
             int puntaje = calcularPuntaje(dados);
 
-            if (puntaje == 1000) {
-                cout << "�Escalera! " << nombre2 << " ha ganado la partida." << endl;
-                return;
+            if (puntaje == 1000) { // Si se obtiene una escalera
+                cout << "Escalera! " << nombre2 << " ha ganado la partida." << endl;
+                return; // Termina el juego
             }
 
-            if (puntaje == -1) {
-                puntajeTotal2 = 0;
+            if (puntaje == -1) { // Si se obtiene un sexteto de 6
+                puntajeTotal2 = 0; // Resetea el puntaje total del segundo jugador
                 maxPuntajeRonda2 = 0;
                 cout << "Sexteto de 6 - Puntaje reseteado a 0" << endl;
                 break;
             }
 
             if (puntaje > maxPuntajeRonda2) {
-                maxPuntajeRonda2 = puntaje;
+                maxPuntajeRonda2 = puntaje; // Actualiza el puntaje máximo de la ronda
             }
 
-            imprimirResultados(dados, puntaje, nombre2);
-
+            imprimirResultados(dados, puntaje, nombre2); // Imprime los resultados de los dados
         }
 
+        cout << "--------------------------------------------------------" << endl;
+        cout << "Maximo Puntaje de la Ronda: " << maxPuntajeRonda2 << endl;
 
-        cout <<"--------------------------------------------------------"<<endl;
-        cout <<"Maximo Puntaje de la Ronda: "<<maxPuntajeRonda2<<endl;
-
-        system("pause");
-        system("CLS");
-
-        puntajeTotal2 += maxPuntajeRonda2;
-        ronda++;
+        puntajeTotal2 += maxPuntajeRonda2; // Actualiza el puntaje total del segundo jugador
+        ronda++; // Incrementa el número de ronda
     }
 
-        if (puntajeTotal1 >= 100 && puntajeTotal2 >= 100) {
+    // Determina el ganador del juego
+    if (puntajeTotal1 >= 100 && puntajeTotal2 >= 100) {
         if (puntajeTotal1 == puntajeTotal2) {
-            cout << "�Empate entre " << nombre1 << " y " << nombre2 << " con " << puntajeTotal1 << " puntos!" << endl;
+            cout << "Empate entre " << nombre1 << " y " << nombre2 << " con " << puntajeTotal1 << " puntos!" << endl;
         } else if (puntajeTotal1 > puntajeTotal2) {
-            cout << "�" << nombre1 << " ha ganado la partida con " << puntajeTotal1 << " puntos!" << endl;
+            cout << nombre1 << " ha ganado la partida con " << puntajeTotal1 << " puntos!" << endl;
         } else {
-            cout << "�" << nombre2 << " ha ganado la partida con " << puntajeTotal2 << " puntos!" << endl;
+            cout << nombre2 << " ha ganado la partida con " << puntajeTotal2 << " puntos!" << endl;
         }
     } else if (puntajeTotal1 >= 100) {
-        cout << "�" << nombre1 << " ha ganado la partida con " << puntajeTotal1 << " puntos!" << endl;
+        cout << nombre1 << " ha ganado la partida con " << puntajeTotal1 << " puntos!" << endl;
     } else {
-        cout << "�" << nombre2 << " ha ganado la partida con " << puntajeTotal2 << " puntos!" << endl;
+        cout << nombre2 << " ha ganado la partida con " << puntajeTotal2 << " puntos!" << endl;
     }
 
+    // Actualiza la puntuación más alta si alguno de los jugadores ha obtenido una puntuación mayor
     if (puntajeTotal1 > puntuacionMasAlta) {
         puntuacionMasAlta = puntajeTotal1;
         nombrePuntuacionMasAlta = nombre1;
@@ -254,11 +236,8 @@ void juegoDosJugadores() {
     }
 }
 
-
-void mostrarPuntuacionMasAlta() {
-    cout << "La puntuaci�n m�s alta es de " << nombrePuntuacionMasAlta << " con " << puntuacionMasAlta << " puntos." << endl;
+// Función que muestra la puntuación más alta
+void mostrarPuntuacionMasAlta(int puntuacionMasAlta, const string& nombrePuntuacionMasAlta) {
+    cout << "La puntuacion mas alta es de " << nombrePuntuacionMasAlta << " con " << puntuacionMasAlta << " puntos." << endl;
 }
 
-
-
-#endif // JUEGO_CPP_INCLUDED
