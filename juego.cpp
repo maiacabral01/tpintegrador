@@ -48,14 +48,23 @@ int calcularPuntaje(int dados[]) {
 
 // Función que verifica si los dados forman una escalera
 bool escalera(int dados[]) {
-    sort(dados, dados + 6); // Ordena los dados
-    for (int i = 0; i < 6; i++) {
-        if (dados[i] != i + 1) {
-            return false; // Si algún dado no coincide con el valor esperado, no es una escalera
+    for (int x=0;x<6;x++){ //damos 6 vueltas para garantizar el orden definitivo.
+        for (int i=0;i<5;i++){// 5 vueltas para comparar elementos entre si...
+            if (dados[i]>dados[i+1]){//...y ordenamos de forma creciente
+                int aux=dados[i+1]; //usamos una variable auxiliar para preservar dados[i+1]
+                dados[i+1]=dados[i];
+                dados[i]=aux;
+            }
         }
     }
-    return true; // Si todos los valores coinciden, es una escalera
+    for (int i = 0; i < 6; i++) {
+        if (dados[i] != i + 1) {
+            return false;// Si algún dado no coincide con el valor esperado, no es una escalera
+        }
+    }
+    return true;// Si todos los valores coinciden, es una escalera
 }
+
 
 // Función que imprime los resultados de los dados y el puntaje
 void imprimirResultados(int dados[], int puntaje, const string& nombre) {
