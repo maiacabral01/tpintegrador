@@ -106,8 +106,8 @@ void juegoUnJugador(int& puntuacionMasAlta, string& nombrePuntuacionMasAlta) {
         system("pause");
         system("CLS");
 
-        cout << "--------RONDA " << ronda << "--------" << endl << endl;
-        cout << "Puntaje actual: " << puntajeTotal << endl;
+        cout << "  "<<nombre << "   | RONDA " << ronda << " | PUNTAJE ACTUAL: " << puntajeTotal << endl;
+        cout << "--------------------------------------------------------" << endl;
         int maxPuntajeRonda = 0; // Puntaje máximo de la ronda
 
         for (int i = 0; i < 3; i++) { // El jugador tira los dados 3 veces en cada ronda
@@ -116,6 +116,7 @@ void juegoUnJugador(int& puntuacionMasAlta, string& nombrePuntuacionMasAlta) {
 
             if (puntaje == 1000) { // Si se obtiene una escalera
                 cout << "Escalera! " << nombre << " ha ganado la partida." << endl;
+                cout << "En la ronda numero: "<<ronda<<endl;
                 return; // Termina el juego
             }
 
@@ -142,6 +143,7 @@ void juegoUnJugador(int& puntuacionMasAlta, string& nombrePuntuacionMasAlta) {
     system("CLS");
 
     cout << "Felicidades, " << nombre << "! Has ganado con un puntaje de " << puntajeTotal << endl;
+    cout << "En la ronda numero: "<<ronda-1<<endl;
 
     // Actualiza la puntuación más alta si el jugador ha obtenido una puntuación mayor
     if (puntajeTotal > puntuacionMasAlta) {
@@ -178,6 +180,7 @@ void juegoDosJugadores(int& puntuacionMasAlta, string& nombrePuntuacionMasAlta) 
 
             if (puntaje == 1000) { // Si se obtiene una escalera
                 cout << "Escalera! " << nombre1 << " ha ganado la partida." << endl;
+                cout << "En la ronda numero: "<<ronda<<endl;
                 return; // Termina el juego
             }
 
@@ -214,6 +217,7 @@ void juegoDosJugadores(int& puntuacionMasAlta, string& nombrePuntuacionMasAlta) 
 
             if (puntaje == 1000) { // Si se obtiene una escalera
                 cout << "Escalera! " << nombre2 << " ha ganado la partida." << endl;
+                cout << "En la ronda numero: "<<ronda<<endl;
                 return; // Termina el juego
             }
 
@@ -252,8 +256,10 @@ void juegoDosJugadores(int& puntuacionMasAlta, string& nombrePuntuacionMasAlta) 
         }
     } else if (puntajeTotal1 >= 100) {
         cout << nombre1 << " ha ganado la partida con " << puntajeTotal1 << " puntos!" << endl;
+        cout << "En la ronda numero: "<<ronda-1<<endl;
     } else {
         cout << nombre2 << " ha ganado la partida con " << puntajeTotal2 << " puntos!" << endl;
+        cout << "En la ronda numero: "<<ronda-1<<endl;
     }
 
     // Actualiza la puntuación más alta si alguno de los jugadores ha obtenido una puntuación mayor
