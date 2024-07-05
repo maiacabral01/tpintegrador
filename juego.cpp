@@ -8,6 +8,12 @@ using namespace std; // Permite el uso del espacio de nombres estándar
 
 // Función que simula tirar los dados
 void tirarDados(int dados[]) {
+    //funcion oculta para ingresar valores manualmente
+//    int n;
+//    cout<<"Ingrese los valores de los dados :"<<endl;
+//    for (int i= 0; i < 6; i++){
+//        cin>>n;
+//        dados[i]= n;
     for (int i = 0; i < 6; i++) {
         dados[i] = rand() % 6 + 1; // Genera un número aleatorio entre 1 y 6 para cada dado
     }
@@ -96,6 +102,10 @@ void juegoUnJugador(int& puntuacionMasAlta, string& nombrePuntuacionMasAlta) {
     srand(time(0)); // Inicializa la semilla para la función rand
 
     while (puntajeTotal < 100) { // Continua jugando hasta que el puntaje total sea al menos 100
+
+        system("pause");
+        system("CLS");
+
         cout << "--------RONDA " << ronda << "--------" << endl << endl;
         cout << "Puntaje actual: " << puntajeTotal << endl;
         int maxPuntajeRonda = 0; // Puntaje máximo de la ronda
@@ -128,6 +138,9 @@ void juegoUnJugador(int& puntuacionMasAlta, string& nombrePuntuacionMasAlta) {
         ronda++; // Incrementa el número de ronda
     }
 
+    system("pause");
+    system("CLS");
+
     cout << "Felicidades, " << nombre << "! Has ganado con un puntaje de " << puntajeTotal << endl;
 
     // Actualiza la puntuación más alta si el jugador ha obtenido una puntuación mayor
@@ -144,6 +157,9 @@ void juegoDosJugadores(int& puntuacionMasAlta, string& nombrePuntuacionMasAlta) 
     cin >> nombre1;
     cout << "Ingrese el nombre del segundo jugador: ";
     cin >> nombre2;
+
+    system("pause");
+    system("CLS");
 
     int puntajeTotal1 = 0, puntajeTotal2 = 0; // Puntajes totales de los jugadores
     int ronda = 1; // Número de ronda
@@ -182,6 +198,9 @@ void juegoDosJugadores(int& puntuacionMasAlta, string& nombrePuntuacionMasAlta) 
         cout << "--------------------------------------------------------" << endl;
         cout << "Maximo Puntaje de la Ronda: " << maxPuntajeRonda1 << endl;
 
+        system("pause");
+        system("CLS");
+
         puntajeTotal1 += maxPuntajeRonda1; // Actualiza el puntaje total del primer jugador
 
         // Turno del segundo jugador
@@ -214,6 +233,9 @@ void juegoDosJugadores(int& puntuacionMasAlta, string& nombrePuntuacionMasAlta) 
 
         cout << "--------------------------------------------------------" << endl;
         cout << "Maximo Puntaje de la Ronda: " << maxPuntajeRonda2 << endl;
+
+        system("pause");
+        system("CLS");
 
         puntajeTotal2 += maxPuntajeRonda2; // Actualiza el puntaje total del segundo jugador
         ronda++; // Incrementa el número de ronda

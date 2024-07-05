@@ -17,22 +17,39 @@ int main() {
         cout << "Ingrese una opcion: ";
         cin >> opcion;
 
+        system("CLS");
+
         switch (opcion) {
 
             case 1:
                 juegoUnJugador(puntuacionMasAlta, nombrePuntuacionMasAlta);
+                system("pause");
+                system("CLS");
                 break;
+
             case 2:
                 juegoDosJugadores(puntuacionMasAlta, nombrePuntuacionMasAlta);
+                system("pause");
+                system("CLS");
                 break;
+
             case 3:
                 mostrarPuntuacionMasAlta(puntuacionMasAlta, nombrePuntuacionMasAlta);
+                system("pause");
+                system("CLS");
                 break;
+
             case 4:
                 cout << "Saliendo del juego..." << endl;
                 break;
+
             default:
+                system("CLS");
+
                 cout << "Opcion no valida. Intente de nuevo." << endl;
+
+                system("pause");
+
 
         }
     } while (opcion != 4);

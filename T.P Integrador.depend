@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1720043623 source:c:\users\54112\onedrive\escritorio\code\github\proyectos\repositorio\tpintegrador\main.cpp
+1720141017 source:c:\users\54112\onedrive\escritorio\code\github\proyectos\repositorio\tpintegrador\main.cpp
 	<iostream>
 	"juego.h"
 
@@ -26,7 +26,7 @@
 1720043623 c:\users\54112\onedrive\escritorio\code\github\proyectos\repositorio\tpintegrador\juego.h
 	<string>
 
-1720043623 source:c:\users\54112\onedrive\escritorio\code\github\proyectos\repositorio\tpintegrador\juego.cpp
+1720141856 source:c:\users\54112\onedrive\escritorio\code\github\proyectos\repositorio\tpintegrador\juego.cpp
 	"juego.h"
 	<iostream>
 	<cstdlib>
